@@ -2,23 +2,43 @@
     box-sizing: border-box;
 }
 
-.container {
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: #1a1a1a;
+}
+
+.map-compare {
     position: relative;
 }
 
-.image {
-    position: absolute;
-    width: auto;
+.map {
+    display: block;
+    max-width: 100%;
     height: auto;
-    overflow: hidden;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
-.image img {
+.map.old {
     display: block;
+}
+
+.map.new {
+    position: absolute;
+    top: 0;
+    left: 0;
+    clip-path: inset(0 0 0 50%);
 }
 
 .slider {
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 9;
     cursor: ew-resize;
     width: 40px;

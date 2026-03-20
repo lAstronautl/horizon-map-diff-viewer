@@ -10,6 +10,7 @@ function queryToImages() {
 
     if (oldUrl === null) {
         newImage.src = newUrl;
+        newImage.onload = compare;
         return;
     }
 
@@ -17,8 +18,7 @@ function queryToImages() {
 
     oldImage.src = oldUrl;
     newImage.src = newUrl;
-
-    compare();
+    newImage.onload = compare;
 }
 
 function getURLParameter(name) {

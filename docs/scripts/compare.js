@@ -1,51 +1,75 @@
 function compare() {
-    const x = document.getElementsByClassName("overlay");
+    const slider = document.getElementById("slider");
+    const newMap = document.getElementById("new-image");
+    const oldMap = document.getElementById("old-image");
+    const container = document.querySelector(".map-compare");
 
-    for (let i = 0; i < x.length; i++) {
-        const image = x[i];
-
-        let clicked = false;
-
-        const height = image.offsetHeight;
-        const width = image.offsetWidth;
-
-        image.style.width = (width / 2) + "px";
-
-        const slider = document.createElement("DIV");
-        slider.setAttribute("class", "slider");
-
-        image.parentElement.insertBefore(slider, image);
-
-        slider.style.top = (height / 2) - (slider.offsetHeight / 2) + "px";
-        slider.style.left = (width / 2) - (slider.offsetWidth / 2) + "px";
-
-        slider.addEventListener("mousedown", slideReady);
-        window.addEventListener("mouseup", () => clicked = false);
-        slider.addEventListener("touchstart", slideReady);
-        window.addEventListener("touchend", () => clicked = false);
-
-        function slideReady(event) {
-            event.preventDefault();
-
-            clicked = true;
-
-            window.addEventListener("mousemove", slideMove);
-            window.addEventListener("touchmove", slideMove);
-        }
-
-        function slideMove(event) {
-            if (!clicked) return false;
-
-            event = event || window.event;
-
-            const imageRect = image.getBoundingClientRect();
-            let pos = event.pageX - imageRect.left - window.pageXOffset;
-
-            if (pos < 0) pos = 0;
-            if (pos > width) pos = width;
-
-            image.style.width = pos + "px";
-            slider.style.left = image.offsetWidth - (slider.offsetWidth / 2) + "px";
-        }
+    if (!slider || !newMap || !oldMap || !container) {
+        return;
     }
+
+    // Ждём загрузки изображений
+    if (!newMap.complete || !newMap.naturalWidth) {
+        newMap.onload = compare;
+        return;
+    }
+
+    // Устанавливаем размеры контейнера по изображению
+    container.style.width = newMap.naturalWidth + "px";
+    container.style.height = newMap.naturalHeight + "px";
+
+    let isDragging = false;
+
+    // Инициализация - ставим слайдер на середину
+    const initialPercent = 50;
+    slider.style.left = initialPercent + "%";
+    newMap.style.clipPath = `inset(0 0 0 ${initialPercent}%)`;
+    oldMap.style.clipPath = `inset(0 ${100 - initialPercent}% 0 0)`;
+
+    slider.addEventListener("mousedown", () => {
+        isDragging = true;
+    });
+
+    window.addEventListener("mouseup", () => {
+        isDragging = false;
+    });
+
+    window.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+
+        const rect = container.getBoundingClientRect();
+        let x = e.clientX - rect.left;
+
+        x = Math.max(0, Math.min(x, rect.width));
+
+        const percent = (x / rect.width) * 100;
+
+        slider.style.left = percent + "%";
+        newMap.style.clipPath = `inset(0 0 0 ${percent}%)`;
+        oldMap.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+    });
+
+    // Touch support
+    slider.addEventListener("touchstart", () => {
+        isDragging = true;
+    });
+
+    window.addEventListener("touchend", () => {
+        isDragging = false;
+    });
+
+    window.addEventListener("touchmove", (e) => {
+        if (!isDragging) return;
+
+        const rect = container.getBoundingClientRect();
+        let x = e.touches[0].clientX - rect.left;
+
+        x = Math.max(0, Math.min(x, rect.width));
+
+        const percent = (x / rect.width) * 100;
+
+        slider.style.left = percent + "%";
+        newMap.style.clipPath = `inset(0 0 0 ${percent}%)`;
+        oldMap.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+    });
 }
