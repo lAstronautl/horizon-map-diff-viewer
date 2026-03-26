@@ -1,25 +1,28 @@
 # О проекте
 
-Этот проект форк "[map-diff-viewer](https://github.com/space-wizards/map-diff-viewer)" by DrSmugleaf Он был взят и улучшен для более удобного использования
+Этот проект форк [map-diff-viewer](https://github.com/space-wizards/map-diff-viewer) by [DrSmugleaf](https://github.com/DrSmugleaf) Он был взят и улучшен для более удобного использования
 
 # Установка
 
 <table>
 <tr>
-<th>Сервер</th>
+<th>Хостинг через GitHub Pages</th>
 <th>Локалка</th>
 </tr>
 <tr>
 <td>
 
 ```
-# Установка
-git clone https://github.com/lAstronautl/horizon-map-diff-viewer.git
-cd horizon-map-diff-viewer/docs
-Далее хостите папку docs
+# Хостинг
+Сделать форк данного репозитория
+Перейти в настройки форкнутого репозитория
+Перейти в GitHub Pages
+В Source выбрать "Deploy from a branch"
+В Branch выбрать ветку "master" а потом папку docs и сохранить
 
 # Зайти
-http:[Ваша сыллка]/?old=maps/Cluster.png&new=maps/CorvaxCluster.png
+Нужно подождать пока сайт запустится 
+https://[ваш никнейм в гитхабе].github.io/horizon-map-diff-viewer/?old=maps/Cluster.png&new=maps/CorvaxCluster.png
 ```
 
 </td>
@@ -43,4 +46,4 @@ http://localhost:[Порт]/?old=maps/Cluster.png&new=maps/CorvaxCluster.png
 </table>
 
 # Лицензия
-Весь код репозиторя находится под [MIT лицензией](https://github.com/lAstronautl/horizon-map-diff-viewer/blob/master/LICENSE).  
+Весь код репозитория находится под [MIT лицензией](https://github.com/lAstronautl/horizon-map-diff-viewer/blob/master/LICENSE).  
