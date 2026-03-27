@@ -1,6 +1,6 @@
 # О проекте
 
-Этот проект форк [map-diff-viewer](https://github.com/space-wizards/map-diff-viewer) by [DrSmugleaf](https://github.com/DrSmugleaf) Он был взят и улучшен для более удобного использования
+Этот проект форк [map-diff-viewer](https://github.com/space-wizards/map-diff-viewer) автор [DrSmugleaf](https://github.com/DrSmugleaf) Он был взят и улучшен для более удобного использования
 
 # Установка
 
@@ -18,7 +18,7 @@
 Перейти в настройки форкнутого репозитория
 Перейти в GitHub Pages
 В Source выбрать "Deploy from a branch"
-В Branch выбрать ветку "master" а потом папку docs и сохранить
+В Branch выбрать ветку "master" а потом папку map-diff-viewer и сохранить
 
 # Зайти
 Нужно подождать пока сайт запустится 
@@ -34,7 +34,7 @@ https://[ваш никнейм в гитхабе].github.io/horizon-map-diff-vie
 
 # Установка
 git clone https://github.com/lAstronautl/horizon-map-diff-viewer.git
-cd horizon-map-diff-viewer/docs
+cd horizon-map-diff-viewer/map-diff-viewer
 python -m http.server [Порт]
 
 # Зайти
