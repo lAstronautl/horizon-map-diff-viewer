@@ -22,7 +22,7 @@
 
 # Зайти
 Нужно подождать пока сайт запустится 
-https://[ваш никнейм в гитхабе].github.io/horizon-map-diff-viewer/?old=maps/Cluster.png&new=maps/CorvaxCluster.png
+https://[ваш никнейм в гитхабе].github.io/horizon-map-diff-viewer
 ```
 
 </td>
@@ -38,12 +38,21 @@ cd horizon-map-diff-viewer/map-diff-viewer
 python -m http.server [Порт]
 
 # Зайти
-http://localhost:[Порт]/?old=maps/Cluster.png&new=maps/CorvaxCluster.png
+http://localhost:[Порт]
 ```
 
 </td>
 </tr>
 </table>
+
+# Добавить карту
+Что бы добавить карту нужно закинуть рендер карты в папку `maps`
+Далее добавить строчку в `index.html`
+```
+const maps = [
+{ id: 'id карты', name: 'название', image: '(maps/название карты.png)' },
+];
+```
 
 # Лицензия
 Весь код репозитория находится под [MIT лицензией](https://github.com/lAstronautl/horizon-map-diff-viewer/blob/master/LICENSE).  
