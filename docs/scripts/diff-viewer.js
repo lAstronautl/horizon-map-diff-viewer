@@ -132,12 +132,21 @@ function initDiffCompare() {
         const zoomOutBtn = document.getElementById("zoom-out");
         const resetZoomBtn = document.getElementById("reset-zoom");
         const resetSliderBtn = document.getElementById("reset-slider");
+        const sliderStyleCheckbox = document.getElementById("slider-style");
 
         centerMapCheckbox.addEventListener("change", (e) => {
             settings.centerMap = e.target.checked;
             const width = parseFloat(mapZoomable.style.width);
             const height = parseFloat(mapZoomable.style.height);
             applyImagePositions(width, height);
+        });
+
+        sliderStyleCheckbox.addEventListener("change", (e) => {
+            if (e.target.checked) {
+                slider.classList.add("line-style");
+            } else {
+                slider.classList.remove("line-style");
+            }
         });
 
         applyOffsetBtn.addEventListener("click", () => {

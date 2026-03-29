@@ -82,6 +82,28 @@
             -ms-user-select: none;
         }
 
+        #slider.line-style {
+            width: 3px;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2196F3;
+            border-radius: 0;
+        }
+
+        #slider.line-style::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 24px;
+            height: 24px;
+            background: #2196F3;
+            border-radius: 50%;
+        }
+
         #controls {
             position: absolute;
             top: 10px;
@@ -227,6 +249,13 @@
 
         <div class="control-group">
             <button id="reset-slider" style="width: 100%;">Reset slider</button>
+        </div>
+
+        <div class="control-group">
+            <div class="checkbox-group">
+                <input type="checkbox" id="slider-style">
+                <label for="slider-style">Line slider</label>
+            </div>
         </div>
 
         <div class="control-group">
