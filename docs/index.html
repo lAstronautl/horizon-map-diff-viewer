@@ -10,212 +10,239 @@
             margin: 0;
             padding: 0;
         }
-        
+
         body {
             background: #1a1a1a;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
-        
-        #map_container {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
-        
-        #map_zoomable {
-            transform-origin: 0 0;
-            cursor: grab;
-        }
-        
-        #map_zoomable:active {
-            cursor: grabbing;
-        }
-        
-        .compare-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: none;
-            image-rendering: auto;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            pointer-events: none;
-        }
-        
-        .compare-image.old {
-            z-index: 1;
-        }
-        
-        .compare-image.new {
-            z-index: 2;
-            clip-path: inset(0 0 0 50%);
-        }
-        
-        #slider {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 999;
-            cursor: ew-resize;
-            width: 40px;
-            height: 40px;
-            background-color: #2196F3;
-            opacity: 0.7;
-            border-radius: 50%;
-            display: none;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
-        
-        #controls {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(40, 40, 40, 0.9);
-            padding: 15px;
-            border-radius: 8px;
-            z-index: 1000;
             color: #CAE9FF;
             font-family: sans-serif;
-            font-size: 14px;
-            backdrop-filter: blur(10px);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+        }
+
+        .selection-group {
+            background: rgba(40, 40, 40, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
             border: 1px solid rgba(202, 233, 255, 0.2);
         }
-        
-        #controls h3 {
-            margin-bottom: 10px;
-            font-size: 16px;
-            border-bottom: 1px solid rgba(202, 233, 255, 0.3);
-            padding-bottom: 5px;
+
+        .selection-group h2 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #2196F3;
         }
-        
-        .control-group {
-            margin-bottom: 12px;
+
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
         }
-        
-        .control-group label {
-            display: block;
-            margin-bottom: 5px;
+
+        .map-card.old-select {
+            border-color: #FF9800;
+            background: #e65100;
         }
-        
-        .control-group input[type="number"] {
-            width: 80px;
+
+        .map-card.new-select {
+            border-color: #4CAF50;
+            background: #1b5e20;
+        }
+
+        .map-card {
             background: #282828;
-            border: 1px solid #555;
-            color: #CAE9FF;
-            padding: 5px;
-            border-radius: 4px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        
-        .control-group button {
+
+        .map-card:hover {
+            border-color: #2196F3;
+            background: #323232;
+        }
+
+        .map-card.selected {
+            border-color: #4CAF50;
+            background: #1b5e20;
+        }
+
+        .map-card img {
+            width: 100%;
+            height: 100px;
+            object-fit: contain;
+            background: #1a1a1a;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .map-card .name {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .actions button {
             background: #2196F3;
             color: white;
             border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 8px;
             cursor: pointer;
-            margin: 2px;
+            margin: 0 10px;
         }
-        
-        .control-group button:hover {
+
+        .actions button:hover {
             background: #1976D2;
         }
-        
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+
+        .actions button:disabled {
+            background: #555;
+            cursor: not-allowed;
         }
-        
-        .checkbox-group input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
+
+        .selected-info {
+            text-align: center;
+            margin-top: 15px;
+            color: #888;
         }
-        
-        .pixel-inputs {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 5px;
-            align-items: center;
-        }
-        
-        .pixel-inputs label {
-            margin: 0;
+
+        .selected-info span {
+            color: #4CAF50;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div id="map_container">
-        <div id="map_zoomable">
-            <img id="old-image" class="compare-image" src="">
-            <img id="new-image" class="compare-image" src="">
-            <div id="slider"></div>
-        </div>
-    </div>
-    
-    <div id="controls">
-        <h3>Настройки</h3>
-        
-        <div class="control-group">
-            <div class="checkbox-group">
-                <input type="checkbox" id="center-map" checked>
-                <label for="center-map">Центрировать карты</label>
-            </div>
-        </div>
-        
-        <div class="control-group">
-            <label>Смещение новой карты (px):</label>
-            <div class="pixel-inputs">
-                <label>X:</label>
-                <input type="number" id="new-offset-x" value="0" step="32">
-                <label>Y:</label>
-                <input type="number" id="new-offset-y" value="0" step="32">
-            </div>
+    <div class="container">
+        <h1>Map Diff Viewer</h1>
+
+        <div class="selection-group">
+            <h2>Select Map</h2>
+            <div class="map-grid" id="maps-container"></div>
+            <p class="selected-info" id="selection-info">
+                Select: <span id="old-selected">none</span> |
+                <span id="new-selected">none</span>
+            </p>
         </div>
 
-        <div class="control-group">
-            <label>Смещение старой карты (px):</label>
-            <div class="pixel-inputs">
-                <label>X:</label>
-                <input type="number" id="old-offset-x" value="0" step="32">
-                <label>Y:</label>
-                <input type="number" id="old-offset-y" value="0" step="32">
-            </div>
-        </div>
-
-        <div class="control-group">
-            <button id="apply-offset" style="width: 100%;">Применить</button>
-            <button id="reset-offset" style="width: 100%;">Сбросить</button>
-        </div>
-        
-        <div class="control-group">
-            <label>Зум:</label>
-            <button id="zoom-in">+</button>
-            <button id="zoom-out">−</button>
-            <button id="reset-zoom" style="width: 100%; margin-top: 5px;">Сбросить зум</button>
-        </div>
-
-        <div class="control-group">
-            <button id="reset-slider" style="width: 100%;">Сбросить слайдер</button>
+        <div class="actions">
+            <button id="compare-btn" disabled>Apply</button>
         </div>
     </div>
 
-    <script type="text/javascript" src="scripts/diff-viewer.js"></script>
+    <script>
+        const maps = [
+            { id: 'Cluster', name: 'Cluster', image: 'maps/Cluster.png' },
+            { id: 'CorvaxCluster', name: 'Corvax Cluster', image: 'maps/CorvaxCluster.png' },
+            { id: 'OldCluster', name: 'Old Cluster', image: 'maps/OldCluster.png' }
+        ];
+
+        let selectedOld = null;
+        let selectedNew = null;
+
+        function createMapCard(map) {
+            const card = document.createElement('div');
+            card.className = 'map-card';
+            card.dataset.mapId = map.id;
+
+            card.innerHTML = `
+                <img src="${map.image}" alt="${map.name}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22100%22><rect fill=%22%23333%22 width=%22200%22 height=%22100%22/><text fill=%22%23666%22 x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22>Preview</text></svg>'">
+                <div class="name">${map.name}</div>
+            `;
+
+            card.addEventListener('click', () => handleCardClick(map));
+            return card;
+        }
+
+        function handleCardClick(map) {
+            if (!selectedOld || (selectedOld && selectedNew)) {
+                selectedOld = map;
+                selectedNew = null;
+            } else if (selectedOld && !selectedNew && selectedOld.id !== map.id) {
+                selectedNew = map;
+            } else if (selectedOld.id === map.id) {
+                selectedOld = null;
+            } else if (selectedNew && selectedNew.id === map.id) {
+                selectedNew = null;
+            }
+            updateSelection();
+        }
+
+        function updateSelection() {
+            document.querySelectorAll('.map-card').forEach(c => {
+                c.classList.remove('old-select', 'new-select');
+            });
+
+            if (selectedOld) {
+                const oldCard = document.querySelector(`.map-card[data-map-id="${selectedOld.id}"]`);
+                if (oldCard) oldCard.classList.add('old-select');
+            }
+            if (selectedNew) {
+                const newCard = document.querySelector(`.map-card[data-map-id="${selectedNew.id}"]`);
+                if (newCard) newCard.classList.add('new-select');
+            }
+
+            document.querySelector('#old-selected').textContent = selectedOld ? selectedOld.name : 'none';
+            document.querySelector('#new-selected').textContent = selectedNew ? selectedNew.name : 'none';
+
+            updateCompareButton();
+        }
+
+        function updateCompareButton() {
+            const btn = document.getElementById('compare-btn');
+            btn.disabled = !(selectedOld && selectedNew);
+        }
+
+        function startCompare() {
+            if (selectedOld && selectedNew) {
+                window.location.href = `diff-viewer.html?old=${selectedOld.image}&new=${selectedNew.image}`;
+            }
+        }
+
+        // Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            const mapsContainer = document.getElementById('maps-container');
+
+            maps.forEach(map => {
+                mapsContainer.appendChild(createMapCard(map));
+            });
+
+            document.getElementById('compare-btn').addEventListener('click', startCompare);
+
+            // Check URL parameters (if opened with ?old=...&new=...)
+            const params = new URLSearchParams(window.location.search);
+            const oldParam = params.get('old');
+            const newParam = params.get('new');
+
+            if (oldParam || newParam) {
+                // Maps already selected - redirect to comparison
+                window.location.href = 'diff-viewer.html' + window.location.search;
+            }
+        });
+    </script>
 </body>
 </html>
